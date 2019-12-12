@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+		/>
+		<title>Stencil Component Starter</title>
+
+		<script type="module" src="/build/hv-input-field.esm.js"></script>
+		<script nomodule src="/build/hv-input-field.js"></script>
+		<style>
+			section {
+				font-family: sans-serif;
+				padding: 2rem;
+				width: 80vw;
+				margin: auto;
+				min-width: 320;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h3>The default</h3>
+			<input-field label="First name"> </input-field>
+		</section>
+
+		<section>
+			<h3>With description</h3>
+			<input-field
+				label="Last name"
+				description="This input is very much required and that's why it also has a description to tell that it is.. although they come apart from each other"
+			></input-field>
+		</section>
+
+		<section>
+			<h3>An optional input</h3>
+			<input-field label="Dogs name" optional></input-field>
+		</section>
+
+		<!-- <section>
+			<h3>With before and after content</h3>
+			<input-field label="First name">
+				<div slot="before">
+					This is content which will come in the element, but before the input
+				</div>
+				<div slot="after">
+					And this is something which will come after. You can do with this
+					whatever you want.
+				</div>
+			</input-field>
+		</section> -->
+	</body>
+</html>
