@@ -18,7 +18,7 @@ export class InputField {
 	@Prop({ attribute: "id" }) elementId!: string;
 	@Prop() optional: boolean = false;
 	@Prop() required: boolean = !this.optional;
-	@Prop() value: string;
+	@Prop({ reflect: true }) value: string;
 	@Prop() name!: string;
 	@Prop() label: string;
 	@Prop() placeholder: string = " ";
@@ -37,6 +37,7 @@ export class InputField {
 	}
 	inputChanged(event: any) {
 		this.value = event.target && event.target.value;
+
 		this.bindValue.emit(this.value);
 	}
 
