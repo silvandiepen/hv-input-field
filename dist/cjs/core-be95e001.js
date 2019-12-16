@@ -1,4 +1,25 @@
-const BUILD = {"allRenderFn":true,"cmpDidLoad":false,"cmpShouldUpdate":false,"cmpDidUnload":false,"cmpDidUpdate":false,"cmpDidRender":false,"cmpWillLoad":false,"cmpWillUpdate":false,"cmpWillRender":false,"connectedCallback":false,"disconnectedCallback":false,"element":false,"event":false,"hasRenderFn":true,"lifecycle":false,"asyncLoading":true,"hostListener":false,"hostListenerTargetWindow":false,"hostListenerTargetDocument":false,"hostListenerTargetBody":false,"hostListenerTargetParent":false,"hostListenerTarget":false,"member":true,"method":false,"mode":false,"noVdomRender":false,"observeAttribute":true,"prop":true,"propBoolean":true,"propNumber":false,"propString":true,"propMutable":false,"reflect":false,"scoped":false,"shadowDom":false,"slot":true,"slotRelocation":true,"state":true,"style":true,"svg":false,"updatable":true,"vdomAttribute":true,"vdomXlink":false,"vdomClass":true,"vdomFunctional":false,"vdomKey":false,"vdomListener":true,"vdomRef":false,"vdomRender":true,"vdomStyle":false,"vdomText":true,"watchCallback":false,"taskQueue":true,"lazyLoad":true,"hydrateServerSide":false,"cssVarShim":true,"initializeNextTick":true,"hydrateClientSide":false,"isDebug":false,"isDev":false,"devTools":false,"lifecycleDOMEvents":false,"profile":false,"hotModuleReplacement":false,"constructableCSS":true,"cssAnnotations":true};
+'use strict';
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) { return e; } else {
+    var n = {};
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () {
+            return e[k];
+          }
+        });
+      });
+    }
+    n['default'] = e;
+    return n;
+  }
+}
+
+const BUILD = {"allRenderFn":true,"cmpDidLoad":false,"cmpShouldUpdate":false,"cmpDidUnload":false,"cmpDidUpdate":false,"cmpDidRender":false,"cmpWillLoad":false,"cmpWillUpdate":false,"cmpWillRender":false,"connectedCallback":false,"disconnectedCallback":false,"element":false,"event":true,"hasRenderFn":true,"lifecycle":false,"asyncLoading":true,"hostListener":false,"hostListenerTargetWindow":false,"hostListenerTargetDocument":false,"hostListenerTargetBody":false,"hostListenerTargetParent":false,"hostListenerTarget":false,"member":true,"method":false,"mode":false,"noVdomRender":false,"observeAttribute":true,"prop":true,"propBoolean":true,"propNumber":false,"propString":true,"propMutable":false,"reflect":false,"scoped":false,"shadowDom":false,"slot":true,"slotRelocation":true,"state":true,"style":true,"svg":false,"updatable":true,"vdomAttribute":true,"vdomXlink":false,"vdomClass":true,"vdomFunctional":false,"vdomKey":false,"vdomListener":true,"vdomRef":false,"vdomRender":true,"vdomStyle":false,"vdomText":true,"watchCallback":false,"taskQueue":true,"lazyLoad":true,"hydrateServerSide":false,"cssVarShim":true,"initializeNextTick":true,"hydrateClientSide":false,"isDebug":false,"isDev":false,"devTools":false,"lifecycleDOMEvents":false,"profile":false,"hotModuleReplacement":false,"constructableCSS":true,"cssAnnotations":true};
 const NAMESPACE = 'hv-input-field';
 
 let queueCongestion = 0;
@@ -56,11 +77,11 @@ const loadModule = (cmpMeta, hostRef, hmrVersionId) => {
     if (module) {
         return module[exportName];
     }
-    return import(
+    return new Promise(function (resolve) { resolve(_interopNamespace(require(
     /* webpackInclude: /\.entry\.js$/ */
     /* webpackExclude: /\.system\.entry\.js$/ */
     /* webpackMode: "lazy" */
-    `./${bundleId}.entry.js${ ''}`).then(importedModule => {
+    `./${bundleId}.entry.js${ ''}`))); }).then(importedModule => {
         {
             moduleCache.set(bundleId, importedModule);
         }
@@ -159,7 +180,7 @@ const patchEsm = () => {
     // @ts-ignore
     if ( !(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'))) {
         // @ts-ignore
-        return import('./css-shim-978387b1-1e75855f.js').then(() => {
+        return new Promise(function (resolve) { resolve(require('./css-shim-978387b1-52a5db49.js')); }).then(() => {
             plt.$cssShim$ = win.__stencil_cssshim;
             if (plt.$cssShim$) {
                 return plt.$cssShim$.initShim();
@@ -173,7 +194,7 @@ const patchBrowser = async () => {
         plt.$cssShim$ = win.__stencil_cssshim;
     }
     // @ts-ignore
-    const importMeta = "";
+    const importMeta = (typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('core-be95e001.js', document.baseURI).href));
     const regex = new RegExp(`\/${NAMESPACE}(\\.esm)?\\.js($|\\?|#)`);
     const scriptElm = Array.from(doc.querySelectorAll('script')).find(s => (regex.test(s.src) ||
         s.getAttribute('data-stencil-namespace') === NAMESPACE));
@@ -186,7 +207,7 @@ const patchBrowser = async () => {
         patchDynamicImport(resourcesUrl.href);
         if (!window.customElements) {
             // @ts-ignore
-            await import('./dom-96781eef-a2fb04dd.js');
+            await new Promise(function (resolve) { resolve(require('./dom-96781eef-e2cadb44.js')); });
         }
         return Object.assign(Object.assign({}, opts), { resourcesUrl: resourcesUrl.href });
     }
@@ -1393,5 +1414,25 @@ const bootstrapLazy = (lazyBundles, options = {}) => {
     // Fallback appLoad event
     endBootstrap();
 };
+const createEvent = (ref, name, flags) => {
+    const elm = getElement(ref);
+    return {
+        emit: (detail) => {
+            return elm.dispatchEvent(new ( CustomEvent)(name, {
+                bubbles: !!(flags & 4 /* Bubbles */),
+                composed: !!(flags & 2 /* Composed */),
+                cancelable: !!(flags & 1 /* Cancellable */),
+                detail
+            }));
+        }
+    };
+};
+const getElement = (ref) =>  getHostRef(ref).$hostElement$ ;
 
-export { patchEsm as a, bootstrapLazy as b, h, patchBrowser as p, registerInstance as r };
+exports.bootstrapLazy = bootstrapLazy;
+exports.createEvent = createEvent;
+exports.getElement = getElement;
+exports.h = h;
+exports.patchBrowser = patchBrowser;
+exports.patchEsm = patchEsm;
+exports.registerInstance = registerInstance;

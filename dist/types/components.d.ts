@@ -41,6 +41,7 @@ declare namespace LocalJSX {
     'elementId': string;
     'label'?: string;
     'name': string;
+    'onValueModel'?: (event: CustomEvent<any>) => void;
     'optional'?: boolean;
     'placeholder'?: string;
     'required'?: boolean;

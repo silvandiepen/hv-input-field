@@ -19,6 +19,13 @@
 | `value`                  | `value`       |             | `string`  | `undefined`      |
 
 
+## Events
+
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `valueModel` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

@@ -5,17 +5,28 @@ export class InputField {
         this.required = !this.optional;
         this.placeholder = " ";
     }
-    handleBlur(event) {
+    valueChanged() {
+        const inputEl = this.el.querySelector("input");
+        console.log("valueChanged");
+        // only update if model and view differ
+        if (inputEl.value !== this.value)
+            inputEl.value = this.value;
+    }
+    inputChanged(event) {
+        console.log("inputChanged", event);
+        let val = event.target && event.target.value;
+        this.value = val;
+        this.valueModel.emit(this.value);
+    }
+    handleBlur() {
+        console.log("handleBlur");
         this.dirty = true;
         this.error = false;
-        this.value = event.target.value;
+        // this.value = event.target.value;
         if (this.value.length < 1 && this.required) {
             this.error = true;
             this.errorMessage = "You need to fill in atleast something...";
         }
-    }
-    handleChange(event) {
-        event.preventDefault();
     }
     render() {
         return (h("div", { class: "input-field" },
@@ -23,7 +34,7 @@ export class InputField {
             " ",
             this.errorMessage && this.error ? (h("div", { class: "input-field__error" }, this.errorMessage)) : (h("div", null)),
             h("slot", { name: "after" }),
-            h("input", { onBlur: event => this.handleBlur(event), onInput: event => this.handleChange(event), class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }),
+            h("input", { onBlur: this.handleBlur, onInput: event => this.inputChanged(event), class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }),
             h("label", { class: "input-field__label" },
                 h("span", { class: "input-field__text" },
                     this.label,
@@ -183,4 +194,21 @@ export class InputField {
         "errorMessage": {},
         "error": {}
     }; }
+    static get events() { return [{
+            "method": "valueModel",
+            "name": "valueModel",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
+        }]; }
+    static get elementRef() { return "el"; }
 }

@@ -1,4 +1,6 @@
+import { EventEmitter } from "../../stencil.core";
 export declare class InputField {
+    el: HTMLElement;
     elementId: string;
     optional: boolean;
     required: boolean;
@@ -7,10 +9,12 @@ export declare class InputField {
     label: string;
     placeholder: string;
     description: string;
+    valueModel: EventEmitter;
     dirty: boolean;
     errorMessage: string;
     error: boolean;
-    handleBlur(event: any): void;
-    handleChange(event: any): void;
+    valueChanged(): void;
+    inputChanged(event: any): void;
+    handleBlur(): void;
     render(): any;
 }

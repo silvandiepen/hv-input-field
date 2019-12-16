@@ -1,10 +1,19 @@
-import { Component, Prop, h, State } from "@stencil/core";
+import {
+	Component,
+	Element,
+	h,
+	Event,
+	EventEmitter,
+	Prop,
+	State
+} from "@stencil/core";
 
 @Component({
 	tag: "input-field",
 	styleUrl: "input-field.scss"
 })
 export class InputField {
+	@Element() el: HTMLElement;
 	@Prop({ attribute: "id" }) elementId!: string;
 	@Prop() optional: boolean = false;
 	@Prop() required: boolean = !this.optional;
@@ -14,21 +23,34 @@ export class InputField {
 	@Prop() placeholder: string = " ";
 	@Prop() description: string;
 
+	@Event() valueModel: EventEmitter;
+
 	@State() dirty: boolean;
 	@State() errorMessage: string;
 	@State() error: boolean;
 
-	handleBlur(event) {
+	valueChanged() {
+		const inputEl = this.el.querySelector("input");
+		console.log("valueChanged");
+		// only update if model and view differ
+		if (inputEl.value !== this.value) inputEl.value = this.value;
+	}
+	inputChanged(event: any) {
+		console.log("inputChanged", event);
+		let val = event.target && event.target.value;
+		this.value = val;
+		this.valueModel.emit(this.value);
+	}
+
+	handleBlur() {
+		console.log("handleBlur");
 		this.dirty = true;
 		this.error = false;
-		this.value = event.target.value;
+		// this.value = event.target.value;
 		if (this.value.length < 1 && this.required) {
 			this.error = true;
 			this.errorMessage = "You need to fill in atleast something...";
 		}
-	}
-	handleChange(event) {
-		event.preventDefault();
 	}
 
 	render() {
@@ -51,8 +73,8 @@ export class InputField {
 				)}
 				<slot name="after"></slot>
 				<input
-					onBlur={event => this.handleBlur(event)}
-					onInput={event => this.handleChange(event)}
+					onBlur={this.handleBlur}
+					onInput={event => this.inputChanged(event)}
 					class="input-field__input"
 					value={this.value}
 					id={this.elementId}
