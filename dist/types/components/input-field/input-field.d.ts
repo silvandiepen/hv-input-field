@@ -9,12 +9,12 @@ export declare class InputField {
     label: string;
     placeholder: string;
     description: string;
-    valueModel: EventEmitter;
+    bindValue: EventEmitter;
     dirty: boolean;
     errorMessage: string;
     error: boolean;
     valueChanged(): void;
     inputChanged(event: any): void;
-    handleBlur(): void;
+    handleBlur(event: any): void;
     render(): any;
 }

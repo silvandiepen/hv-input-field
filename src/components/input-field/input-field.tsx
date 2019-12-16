@@ -24,7 +24,7 @@ export class InputField {
 	@Prop() placeholder: string = " ";
 	@Prop() description: string;
 
-	@Event() valueChange: EventEmitter;
+	@Event() bindValue: EventEmitter;
 
 	@State() dirty: boolean;
 	@State() errorMessage: string;
@@ -37,7 +37,7 @@ export class InputField {
 	}
 	inputChanged(event: any) {
 		this.value = event.target && event.target.value;
-		this.valueChange.emit(this.value);
+		this.bindValue.emit(this.value);
 	}
 
 	handleBlur(event) {

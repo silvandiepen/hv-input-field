@@ -7,22 +7,18 @@ export class InputField {
     }
     valueChanged() {
         const inputEl = this.el.querySelector("input");
-        console.log("valueChanged");
         // only update if model and view differ
         if (inputEl.value !== this.value)
             inputEl.value = this.value;
     }
     inputChanged(event) {
-        console.log("inputChanged", event);
-        let val = event.target && event.target.value;
-        this.value = val;
-        this.valueModel.emit(this.value);
+        this.value = event.target && event.target.value;
+        this.bindValue.emit(this.value);
     }
-    handleBlur() {
-        console.log("handleBlur");
+    handleBlur(event) {
         this.dirty = true;
         this.error = false;
-        // this.value = event.target.value;
+        this.value = event.target && event.target.value;
         if (this.value.length < 1 && this.required) {
             this.error = true;
             this.errorMessage = "You need to fill in atleast something...";
@@ -34,7 +30,7 @@ export class InputField {
             " ",
             this.errorMessage && this.error ? (h("div", { class: "input-field__error" }, this.errorMessage)) : (h("div", null)),
             h("slot", { name: "after" }),
-            h("input", { onBlur: this.handleBlur, onInput: event => this.inputChanged(event), class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }),
+            h("input", { onBlur: event => this.handleBlur(event), onInput: event => this.inputChanged(event), class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }),
             h("label", { class: "input-field__label" },
                 h("span", { class: "input-field__text" },
                     this.label,
@@ -195,8 +191,8 @@ export class InputField {
         "error": {}
     }; }
     static get events() { return [{
-            "method": "valueModel",
-            "name": "valueModel",
+            "method": "bindValue",
+            "name": "bindValue",
             "bubbles": true,
             "cancelable": true,
             "composed": true,

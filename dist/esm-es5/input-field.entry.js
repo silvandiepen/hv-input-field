@@ -5,26 +5,22 @@ var InputField = /** @class */ (function () {
         this.optional = false;
         this.required = !this.optional;
         this.placeholder = " ";
-        this.valueModel = createEvent(this, "valueModel", 7);
+        this.bindValue = createEvent(this, "bindValue", 7);
     }
     InputField.prototype.valueChanged = function () {
         var inputEl = this.el.querySelector("input");
-        console.log("valueChanged");
         // only update if model and view differ
         if (inputEl.value !== this.value)
             inputEl.value = this.value;
     };
     InputField.prototype.inputChanged = function (event) {
-        console.log("inputChanged", event);
-        var val = event.target && event.target.value;
-        this.value = val;
-        this.valueModel.emit(this.value);
+        this.value = event.target && event.target.value;
+        this.bindValue.emit(this.value);
     };
-    InputField.prototype.handleBlur = function () {
-        console.log("handleBlur");
+    InputField.prototype.handleBlur = function (event) {
         this.dirty = true;
         this.error = false;
-        // this.value = event.target.value;
+        this.value = event.target && event.target.value;
         if (this.value.length < 1 && this.required) {
             this.error = true;
             this.errorMessage = "You need to fill in atleast something...";
@@ -32,7 +28,7 @@ var InputField = /** @class */ (function () {
     };
     InputField.prototype.render = function () {
         var _this = this;
-        return (h("div", { class: "input-field" }, this.description ? (h("div", { class: "input-field__description" }, this.description)) : (h("div", null)), " ", this.errorMessage && this.error ? (h("div", { class: "input-field__error" }, this.errorMessage)) : (h("div", null)), h("slot", { name: "after" }), h("input", { onBlur: this.handleBlur, onInput: function (event) { return _this.inputChanged(event); }, class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }), h("label", { class: "input-field__label" }, h("span", { class: "input-field__text" }, this.label, this.optional ? (h("span", { class: "input-field__optional" }, "(optional)")) : (""))), h("slot", { name: "before" })));
+        return (h("div", { class: "input-field" }, this.description ? (h("div", { class: "input-field__description" }, this.description)) : (h("div", null)), " ", this.errorMessage && this.error ? (h("div", { class: "input-field__error" }, this.errorMessage)) : (h("div", null)), h("slot", { name: "after" }), h("input", { onBlur: function (event) { return _this.handleBlur(event); }, onInput: function (event) { return _this.inputChanged(event); }, class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }), h("label", { class: "input-field__label" }, h("span", { class: "input-field__text" }, this.label, this.optional ? (h("span", { class: "input-field__optional" }, "(optional)")) : (""))), h("slot", { name: "before" })));
     };
     Object.defineProperty(InputField.prototype, "el", {
         get: function () { return getElement(this); },

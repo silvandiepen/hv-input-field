@@ -21,9 +21,9 @@
 
 ## Events
 
-| Event        | Description | Type               |
-| ------------ | ----------- | ------------------ |
-| `valueModel` |             | `CustomEvent<any>` |
+| Event       | Description | Type               |
+| ----------- | ----------- | ------------------ |
+| `bindValue` |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------
