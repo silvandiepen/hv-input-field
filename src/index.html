@@ -10,18 +10,58 @@
 
 		<script type="module" src="/build/hv-input-field.esm.js"></script>
 		<script nomodule src="/build/hv-input-field.js"></script>
+		<script>
+			const inputField = document.querySelector("input-field");
+			inputField.value = "Vanilla Example";
+		</script>
 		<style>
+			body {
+				margin: 0;
+				font-family: "Nexa", sans-serif;
+
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				background-color: white;
+			}
+
 			section {
-				font-family: sans-serif;
 				padding: 2rem;
-				width: 80vw;
-				margin: auto;
-				min-width: 320;
+			}
+			.background--champagne {
+				color: #2800a0;
+				background-color: #f3e5d8;
+			}
+			.background--green {
+				color: white;
+				background-color: #00d66c;
+			}
+			.background--blue {
+				color: white;
+				background-color: #2800a0;
 			}
 		</style>
 	</head>
 	<body>
-		<section>
+		<section class="background--green">
+			<h1>Vanilla Web Components</h1>
+		</section>
+
+		<section class="background--white">
+			<h3>Web component Input</h3>
+			<input-field
+				label="Input in Vanilla"
+				value="Vanilla Example"
+			></input-field>
+		</section>
+
+		<section class="background--champagne">
+			<h3>Default HTML Input</h3>
+			<input type="text" value="Vanilla Example" />
+		</section>
+		<section class="background--blue">
+			<p>Message: <strong>Vanilla Example</strong></p>
+		</section>
+		<!-- <section>
 			<h3>The default</h3>
 			<input-field label="First name"> </input-field>
 		</section>
@@ -37,6 +77,6 @@
 		<section>
 			<h3>An optional input</h3>
 			<input-field label="Dogs name" optional></input-field>
-		</section>
+		</section> -->
 	</body>
 </html>

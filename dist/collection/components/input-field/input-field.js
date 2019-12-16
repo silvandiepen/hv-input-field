@@ -113,7 +113,7 @@ export class InputField {
                 "text": ""
             },
             "attribute": "value",
-            "reflect": false
+            "reflect": true
         },
         "name": {
             "type": "string",
@@ -192,7 +192,7 @@ export class InputField {
     }; }
     static get events() { return [{
             "method": "bindValue",
-            "name": "bindValue",
+            "name": "change",
             "bubbles": true,
             "cancelable": true,
             "composed": true,
