@@ -4,14 +4,13 @@
 	flex-direction: column-reverse;
 	width: 100%;
 	max-width: 100%;
-	font-family: $hv-font-family;
 	font-size: $hv-font-size;
+	font-family: $hv-font-family;
 	&__label {
 		position: absolute;
 		top: 0rem;
 		left: 0rem;
 		color: $hv-input-font-color;
-
 		font-size: $hv-input-font-size;
 		font-family: $hv-input-font-family;
 		line-height: 1;
@@ -61,15 +60,15 @@
 		}
 	}
 	&__error {
-		color: $hv-Ruby;
-		padding: #{$hv-input-padding-top / 3 * 2} #{$hv-input-padding-left / 3 * 2};
-		background-color: $hv-Ruby;
-		color: $hv-White;
 		border-radius: $hv-border-radius;
+		background-color: $hv-Ruby;
+		color: $hv-Ruby;
+		color: $hv-White;
 		font-size: 0.8em;
 		opacity: 0;
-		margin-top: 0.5em;
 		animation: errorShow $hv-transition forwards;
+		padding: #{$hv-input-padding-top / 3 * 2} #{$hv-input-padding-left / 3 * 2};
+		margin-top: 0.5em;
 		@at-root {
 			@keyframes errorShow {
 				from {
@@ -77,24 +76,24 @@
 					opacity: 0;
 				}
 				to {
-					opacity: 1;
 					transform: translateX(0rem);
+					opacity: 1;
 				}
 			}
 		}
 	}
 	&__description {
-		font-family: $hv-font-family;
 		color: currentColor;
-		line-height: 1.5;
-		padding: #{$hv-input-padding-top / 2} #{$hv-input-padding-left / 2};
 		font-size: 0.85em;
+		font-family: $hv-font-family;
+		line-height: 1.5;
 		opacity: 0;
 		animation: errorShow $hv-transition forwards;
+		padding: #{$hv-input-padding-top / 2} #{$hv-input-padding-left / 2};
 	}
 	&__optional {
-		margin-left: 1ch;
 		opacity: 0.5;
+		margin-left: 1ch;
 	}
 	& + & {
 		margin-top: $hv-margin;
