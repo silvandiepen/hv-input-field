@@ -1,6 +1,1 @@
-import { p as patchBrowser, g as globals, b as bootstrapLazy } from './core-4033defc.js';
-
-patchBrowser().then(options => {
-  globals();
-  return bootstrapLazy([["input-field",[[4,"input-field",{"elementId":[1,"id"],"optional":[4],"required":[4],"value":[513],"name":[1],"label":[1],"placeholder":[1],"description":[1],"dirty":[32],"errorMessage":[32],"error":[32]}]]]], options);
-});
+import{p as e,b as r}from"./p-232f4ddd.js";e().then(e=>r([["p-tw3jstmc",[[4,"input-field",{elementId:[1,"id"],optional:[4],required:[4],value:[513],name:[1],label:[1],placeholder:[1],description:[1],dirty:[32],errorMessage:[32],error:[32]}]]]],e));

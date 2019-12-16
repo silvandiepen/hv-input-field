@@ -192,7 +192,7 @@ export class InputField {
     }; }
     static get events() { return [{
             "method": "bindValue",
-            "name": "change",
+            "name": "bindValue",
             "bubbles": true,
             "cancelable": true,
             "composed": true,

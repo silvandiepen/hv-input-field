@@ -24,13 +24,7 @@ export class InputField {
 	@Prop() placeholder: string = " ";
 	@Prop() description: string;
 
-	@Event({
-		eventName: "change",
-		composed: true,
-		cancelable: true,
-		bubbles: true
-	})
-	bindValue: EventEmitter;
+	@Event() bindValue: EventEmitter;
 
 	@State() dirty: boolean;
 	@State() errorMessage: string;
