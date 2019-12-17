@@ -10,6 +10,10 @@ import { HTMLStencilElement, JSXBase } from './stencil.core';
 
 
 export namespace Components {
+  interface HvButton {
+    'icon': string;
+    'label': string;
+  }
   interface InputField {
     'description': string;
     'elementId': string;
@@ -25,17 +29,28 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLHvButtonElement extends Components.HvButton, HTMLStencilElement {}
+  var HTMLHvButtonElement: {
+    prototype: HTMLHvButtonElement;
+    new (): HTMLHvButtonElement;
+  };
+
   interface HTMLInputFieldElement extends Components.InputField, HTMLStencilElement {}
   var HTMLInputFieldElement: {
     prototype: HTMLInputFieldElement;
     new (): HTMLInputFieldElement;
   };
   interface HTMLElementTagNameMap {
+    'hv-button': HTMLHvButtonElement;
     'input-field': HTMLInputFieldElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface HvButton {
+    'icon'?: string;
+    'label'?: string;
+  }
   interface InputField {
     'description'?: string;
     'elementId': string;
@@ -49,6 +64,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'hv-button': HvButton;
     'input-field': InputField;
   }
 }
@@ -59,6 +75,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'hv-button': LocalJSX.HvButton & JSXBase.HTMLAttributes<HTMLHvButtonElement>;
       'input-field': LocalJSX.InputField & JSXBase.HTMLAttributes<HTMLInputFieldElement>;
     }
   }
