@@ -36,5 +36,7 @@
 		"stylelint-order": "^3.1.1"
 	},
 	"license": "MIT",
-	"dependencies": {}
+	"dependencies": {
+		"@stencil/react-output-target": "0.0.2"
+	}
 }
